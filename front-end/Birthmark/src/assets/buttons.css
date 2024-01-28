@@ -1,0 +1,154 @@
+/* <<<<<<<<<<<<<<<<<<<<<<<<< To be put in the global scope >>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+input,
+button {
+  font-size: 18px;
+  line-height: 18px;
+  color: #6C7587;
+  padding: 0 8px;
+  position: relative;
+  border: 3px solid rgba(255, 255, 255, 0);
+  outline: none;
+  text-align: center;
+  background-color: #EBECF0;
+  transition: all 250ms ease-in-out;
+}
+
+input:hover,
+button:hover {
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+  box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4), -6px -6px 12px -1px white;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: inset -4px -4px 6px -1px white, inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+  border-color: rgba(255, 255, 255, 0);
+}
+
+button>* {
+  vertical-align: middle;
+}
+
+button>span:last-child {
+  padding-left: 8px;
+}
+
+input {
+  box-shadow: inset -4px -4px 6px -1px white, inset 2px 2px 8px -1px rgba(72, 79, 96, 0.5);
+}
+
+input:focus {
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+input::placeholder {
+  font-size: 18px;
+  line-height: 18px;
+  color: #6C7587;
+  opacity: 1;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: #6C7587;
+}
+
+.icon-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+}
+
+.icon-btn__icon {
+  width: 24px;
+  height: 24px;
+  fill: #8992A5;
+}
+
+.oval-sm,
+.oval-lg,
+.oval-lg--with-icon,
+.oval-xlg {
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 40px;
+}
+
+.oval-xlg {
+  width: 450px;
+  height: 60px;
+}
+
+.oval-lg,
+.oval-lg--with-icon {
+  width: 382px;
+  margin-bottom: 15px;
+}
+
+.oval-lg--with-icon {
+  text-align: left;
+}
+
+.oval-sm {
+  width: 140px;
+}
+
+.oval-lg.err {
+    border: 2px solid red;
+    color: red;
+    box-sizing: border-box;
+}
+
+/* <<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+/* @@@@@@@@@@@@@@@@@@@@@@ */
+.btn {
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.btn.animation {
+  transition: background-color 0.4s ease;
+}
+
+.btn.animation::before,
+.btn.animation::after {
+  display: block;
+  
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  z-index: 1;
+}
+
+.btn.animation::before {
+  left: 20px;
+  transform: translate(calc(-100% - 20px), -50%);
+  transition: transform 0.2s ease;
+}
+
+.btn.animation::after {
+  right: 20px;
+  transition: transform 0.2s ease 0.1s;
+}
+
+
+.btn.animation:hover::before {
+  transform: translate(0, -50%);
+  transition: transform 0.2s ease 0.1s;
+}
+
+.btn.animation:hover::after {
+  transform: translate(calc(100% + 20px), -50%);
+  transition: transform 0.2s ease;
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@ */

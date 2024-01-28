@@ -1,0 +1,165 @@
+.row-container {
+    border-top: 1px solid #858585;
+    padding: 13px 60px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-container:hover {
+    background-color: #c5c5c5;
+}
+
+.row-container:hover .buttons {
+    opacity: 1;
+}
+
+.grey {
+    background: rgb(230, 230, 230);
+}
+
+.top {
+    background-color: #b2e0df;
+    border: none;
+    margin-top: 150px;
+    margin-bottom: 2px;
+}
+
+.top:hover {
+    background-color: #b2e0df;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-selector {
+    background: #fff;
+    padding: 0;
+    border-radius: 10px;
+    position: absolute;
+    top: 220px;
+    right: 45px;
+    z-index: 2;
+}
+
+.filter-selector ul {
+    padding: 3px 3px;
+    background-color: #b2e0df;
+}
+
+.filter-selector ul li {
+    border-top: 1px solid #7a7979;
+    list-style: none;
+    width: 137px;
+    padding-left: 27px;
+    background-color: #fff;
+}
+
+#top-row {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-top: 20px;
+    background-color: #5cbdbb;
+    width: 100%;
+    color: #fff;
+}
+
+#top-row:hover {
+    cursor: default;
+}
+
+.filter-selector ul li:hover {
+    background: #b5b4b4;
+    cursor: pointer;
+}
+
+.filter {
+    background: #fff;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .3),
+        -4px -4px 6px 0 rgba(116, 125, 136, .2),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+#filter-icon {
+    color: #5cbdbb;
+}
+
+#filter-icon:hover {
+    transform: scale(1.2);
+}
+
+.table-names {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+}
+
+.input-value {
+    width: 200px;
+    text-align: start;
+}
+
+input {
+    padding: 7px 5px 7px 5px;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 17px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+
+
+.buttons {
+    display: flex;
+    gap: 28px;
+    opacity: 0;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}
+
+#pin {
+    color: red;
+    font-size: 25px;
+}
+
+.bx {
+    font-size: 22px;
+    color: #4490e2;
+    transition: all 0.2s linear;
+}
+
+.bx:hover {
+    cursor: pointer;
+    transform: scale(1.6);
+}
+
+.bx-trash {
+    color: red;
+}
+
+.bxs-heart {
+    color: rgb(246, 255, 124);
+}
+
+.save:hover,
+.cancel:hover {
+    transform: none;
+}

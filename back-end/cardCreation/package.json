@@ -1,0 +1,23 @@
+{
+  "name": "birthmark",
+  "version": "1.0.0",
+  "description": "Automated birthday-card on birthday",
+  "main": "./cron.js",
+  "type": "module",
+  "bin": {
+    "mark": "bin/enc.js"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "SimchaJ",
+  "license": "ISC",
+  "dependencies": {
+    "cron": "^3.1.6",
+    "docxtemplater": "^3.43.0",
+    "dotenv": "^16.3.1",
+    "nodejs-nodemailer-outlook": "^1.2.4",
+    "pizzip": "^3.1.4"
+  },
+  "keywords": []
+}

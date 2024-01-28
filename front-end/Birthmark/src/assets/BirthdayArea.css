@@ -1,0 +1,131 @@
+:root {
+  --mouse_hover: url("/bxs-balloon.svg");
+  --color-primary: #2fa8cc;
+  --color-lite: #2fa7cc56;
+}
+
+.main-container {
+  /* background-image: url(../../public/bd-design.svg); */
+  background-position: center bottom;
+  /* background-size: cover; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 1000px;
+  width: 99vw;
+  overflow: hidden;
+  /* background-image: url(../../public/bg_bd.svg); */
+  /* background-position: bottom;
+  background-size: cover;
+  background-color: #EBECF0; */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  cursor: url("/bxs-balloon.svg"), default;
+  /* mix-blend-mode: difference; */
+}
+
+.hidden {
+  display: none;
+}
+
+.designRound {
+  border-radius: 50%;
+  position: absolute;
+  z-index: 0;
+}
+
+/* 
+.first {
+  height: 1300px;
+  width: 1800px;
+  background: var(--color-lite);
+  top: -800px;
+  left: -1050px;
+} */
+
+/* .second {
+  height: 1300px;
+  width: 1800px;
+  background: #4848ad86;
+  bottom: -1000px;
+  left: -750px;
+} */
+
+/* .third {
+  height: 1300px;
+  width: 1800px;
+  background: var(--color-lite);
+  bottom: -700px;
+  right: -1050px;
+} */
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; */
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  height: 150px;
+  width: 600px;
+  padding: 1rem;
+  background-color: #000000b3;
+  border-radius: 30px;
+  color: #fff;
+}
+
+
+.header {
+  width: 100%;
+  z-index: 7;
+}
+
+/* .date {
+
+} */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+  /*right: 0; */
+  width: 100%;
+}
+
+.forms {
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* @media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+} */
