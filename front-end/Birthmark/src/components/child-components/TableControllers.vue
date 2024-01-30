@@ -1,19 +1,26 @@
 <template>
-    <div class="row-container top">
-        <search-bar @search-results="updateRecipients" />
-        <div class="amount">
+    <search-bar v-bind="$attrs" :birthmark-array="birthmarkArray"/>
+    <!-- <search-bar @search-results="updateRecipients" /> -->
+    <div class="amount">
 
-        </div>
-
+    </div>
+    <div class="filter-buttons">
         <div class="filter" @click="filterView = !filterView">
             <i class='bx bx-filter-alt' id="filter-icon"></i>
             <div class="filter-selector" :class="{ 'hidden': filterView }">
                 <ul>
+                    <li id="top-row">
+                        <h2>Filter by</h2>
+                    </li>
                     <li v-for="(column, index) in filterOptions" :key="index" @click="selectFilter(column)">
                         {{ column }}
                     </li>
                 </ul>
             </div>
+        </div>
+
+        <div class="order-by filter" @click="orderHandler">
+            <i :class="sortByButton" id="filter-icon" :value="orderValue"></i>
         </div>
     </div>
 </template>
@@ -22,25 +29,49 @@
 import SearchBar from './headerComponents/SearchBar.vue';
 export default {
     name: "TableControllers",
+    props: {
+        birthmarkArray: Array,
+        filterOptions: Array
+    },
     components: {
         SearchBar
     },
+    data() {
+        return {
+            filterData: '',
+            filterView: true,
+            token: localStorage.getItem("token"),
+            order: 'a-z',
+            orderValue: 'ASC'
+        }
+    },
+    methods: {
+        updateRecipients(update) {
+            this.birthmarks = update;
+        },
+        selectFilter(option) {
+            this.$emit("filterData", option);
+        },
+        orderHandler() {
+            if (this.order === 'a-z') {
+                this.order = 'z-a';
+                this.$emit("orderUpdate", 'DESC');
+            } else {
+                this.order = 'a-z';
+                this.$emit("orderUpdate", 'ASC');
+            }
+        },
+    },
     computed: {
-        filterOptions() {
-            const columnArray = [...this.columns];
-            const columnName = columnArray.map(col => col.Field);
-            return columnName.filter(name => {
-                if (name !== "id" && name !== "user_id" && name !== "deleted_at") {
-                    return name
-                }
-            });
+        sortByButton() {
+            return `bx bx-sort-${this.order}`
         }
     }
 
 }
 </script>
 
-<style>
+<!-- <style>
 .row-container {
     border-top: 1px solid #858585;
     padding: 13px 60px;
@@ -101,4 +132,13 @@ export default {
 #filter-icon:hover {
     transform: scale(1.2);
 }
+</style> -->
+<style>
+.wewe {
+    position: absolute;
+    top: 300px;
+    font-size: 100px;
+    color: red;
+}
 </style>
+<style scoped src="../../assets/birthmarkRow.css"></style>

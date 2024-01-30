@@ -5,33 +5,30 @@
     </div>
     <form>
 
-      <input type="date" class="oval-lg" max="9999-12-31" min="0000-01-01" pattern="[0-9]{2}-[0-9]{2}" inputmode="month"
-        v-model="birthDate">
-
       <input type="text" class="oval-lg" placeholder="Enter recipients name" v-model="recipientName">
 
       <input type="email" class="oval-lg" placeholder="Enter recipients email" v-model="recipientEmail">
 
+      <label for="date-input">Enter recipients birthday:</label>
+      <input name="date-input" type="date" class="oval-lg" max="9999-12-31" min="0000-01-01" pattern="[0-9]{2}-[0-9]{2}"
+        inputmode="month" v-model="birthDate">
 
       <div class="style-picker" @mouseenter="showDropDown($event)" @mouseleave="showDropDown($event)">
         <button class="oval-lg style-picked">
           <span>{{ stylePicked }}</span>
-          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-            <polygon
-              transform="translate(20.000000, 20.500000) rotate(-90.000000) translate(-20.000000, -20.500000) translate(12.000000, 8.000000)"
-              points="12.8 0 15.6 2.9 5.7 12.2 15.6 22 12.7 24.8 2.8 14.9 2.7 14.9 1.4 13.5 0 12.1 0 12.1 0 12 1.4 10.7 2.8 9.3 2.9 9.3">
-            </polygon>
-          </svg>
+          <i class='bx bx-chevron-down icon'></i>
         </button>
         <div class="drop-down">
-          <p class="style-choice pro-style-choice" @click.prevent="$router.push('proSignup')">Upload your design <i class='bx bx-crown'></i></p>
+          <p class="style-choice pro-style-choice" @click.prevent="$router.push('proSignup')">Upload your design <i
+              class='bx bx-crown'></i></p>
           <p class="style-choice" v-for="(style, index) in styleList" :key="index" :id="style"
-            @click.prevent="styleChoice(style, $event)">
+            @click="styleChoice(style, $event)">
             {{ style }}</p>
         </div>
       </div>
       <div class="buttons">
-        <button class="oval-xlg btn animation reg" type="button" @click="postRecipient"><i class="icon ion-md-lock"></i>
+        <button class="oval-xlg btn animation reg" type="button" @click.prevent="postRecipient($event)"><i
+            class="icon ion-md-lock"></i>
           Mark me up!</button>
         <button class="oval-xlg btn animation pro" id="pro" type="button" @click="checkProStatus"><i
             class="icon ion-md-lock"></i><i class='bx bx-crown'></i> Multiple mark
@@ -68,10 +65,12 @@ export default {
   },
   methods: {
 
-    //choose a astyle
-    styleChoice(style, { target }) {
+    //choose a style
+    styleChoice(style, event) {
+      event.preventDefault();
+      event.stopPropagation();
       this.stylePicked = style;
-      target.parentNode.classList.remove('show-drop-down');
+      event.target.parentNode.classList.remove('show-drop-down');
     },
     showDropDown(event) {
       const dropDown = event.target.children[1].classList;
@@ -103,9 +102,9 @@ export default {
       return info;
     },
 
-    async postRecipient() {
+    async postRecipient({ target }) {
       // condition if the user is not signed in.
-      if(!localStorage.getItem('token')) return this.$router.push('/login');
+      if (!localStorage.getItem('token')) return this.$router.push('/login');
       const res = await fetch(`http://localhost:3444/recipients/post`, {
         method: 'POST',
         headers: {
@@ -116,12 +115,12 @@ export default {
       });
       const data = await res.json();
       if (res.status === 200) {
+        target.closest('form').reset();
         confetti({ particleCount: 700, spread: 160 });
         setTimeout(() => {
           this.successStat = true;
           this.msg = data;
         }, 5 * 1000);
-
       }
 
     },
@@ -212,6 +211,11 @@ form {
   text-align: center;
 }
 
+::placeholder,
+input[type=date]:invalid::-webkit-datetime-edit {
+  color: #cbced1;
+}
+
 #pro {
   overflow: hidden;
 }
@@ -269,13 +273,18 @@ form {
   color: #333;
 }
 
+.icon {
+  font-size: 30px;
+  color: #4d4d4d;
+}
+
 .show-drop-down {
   display: block;
 }
 
 
 .style-choice:hover {
-  background: #bbe8ff;
+  background: #DAEAF3;
   color: #2fa8cc;
 }
 
@@ -286,6 +295,6 @@ form {
 
 
 .style-choice {
-  border-top: 1px solid #a5a5a5;
+  border-top: 0.3px solid #E1E1E1;
 }
 </style>

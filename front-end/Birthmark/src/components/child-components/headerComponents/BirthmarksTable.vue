@@ -1,8 +1,9 @@
 <template>
-    <div class="birthmarks-container" v-if="birthmarksStat">
 
+    <div class="exit-bm_table" @click="$router.push('/input')">X</div>
+    <div class="birthmarks-container" v-if="birthmarksStat">
         <birthmark-row :birthmarkArray="birthmarkArray" :columns="columns" @filter-data="updateFilter"
-            @order-update="updateOrder" @recipientDeleted="updateOrder" />
+            @order-update="updateOrder" @recipient-deleted="updateOrder" />
     </div>
 
     <div class="empty-state" v-else>
@@ -44,6 +45,7 @@ export default {
             console.log(res.status);
             const { recipients, columns } = await res.json();
             this.birthmarkArray = recipients;
+            // this.birthmarkArray = [...recipients];
             this.columns = columns;
             return recipients;
         },
@@ -64,6 +66,7 @@ export default {
     async mounted() {
         await this.getRecipients(this.orderBy);
     },
+    watch: { birthmarkArray(update){ return this.birthmarkArray = update}},
     computed: {
         birthmarksStat() {
             const stat = this.birthmarkArray.length
@@ -83,6 +86,24 @@ export default {
 
 :root {
     --main-font: 'Audiowide', sans-serif;
+}
+
+.exit-bm_table, .exit-bm_table:active {
+    position: absolute;
+   height: 50px;
+   width: 50px;
+   text-align: center;
+   box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    border-radius: 50px;
+    background-color: #b2e0df;
+    top: 102px;
+    right: 35px;
+    color: red;
+    font-size: 30px;
+}
+
+.exit-bm_table:hover {   
+   box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
 }
 
 .birthmarks-container {

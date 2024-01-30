@@ -1,6 +1,6 @@
 <template>
     <div class="search-container">
-        <input type="text" placeholder="Search" v-model="searchData" id="search-input" />
+        <input type="text" placeholder="Search" id="search-input" v-model="searchData"/>
         <i class="bx bx-search"></i>
     </div>
 </template>
@@ -8,6 +8,9 @@
 <script>
 export default {
     name: "SearchBar",
+    props: {
+        birthmarkArray: Array
+    },
     data() {
         return {
             searchData: "",
@@ -27,7 +30,10 @@ export default {
     },
     watch: {
         async searchData() {
-            const results = await this.searchClients(this.searchData);
+            //Back-end option
+            //const results = await this.searchClients(this.searchData);
+            //front-end option (PREFERRED)
+            const results = this.birthmarkArray.filter(birthmark => birthmark.last_name.toLowerCase().includes(this.searchData.toLowerCase()));
             this.$emit("searchResults", results);
         }
     }

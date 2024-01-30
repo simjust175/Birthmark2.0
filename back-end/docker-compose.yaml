@@ -1,0 +1,33 @@
+version: '3'
+ 
+services:
+  db-mysql:
+    image: mysql:5.7
+    container_name: db-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: nodeapi
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      #change the first port #
+    ports:
+      - "3306:3306"
+      # -dbdata cannot be used twice
+    volumes:
+    # - ./dbdata:/var/lib/mysql
+      - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db-mysql
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      # pma port should port
+    ports:
+        - 8081:80
+      # dbdata cannot be called twice  
+volumes:
+  dbdata:  

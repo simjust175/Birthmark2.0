@@ -1,28 +1,7 @@
 <template>
     <div class="row-container top">
-        <!--<table-controllers />-->
-        <search-bar @search-results="updateRecipients" />
-        <div class="amount">
-
-        </div>
-        <div class="filter-buttons">
-            <div class="filter" @click="filterView = !filterView">
-                <i class='bx bx-filter-alt' id="filter-icon"></i>
-                <div class="filter-selector" :class="{ 'hidden': filterView }">
-                    <ul>
-                        <li id="top-row"> <h2>Filter by</h2> </li>
-                        <li v-for="(column, index) in filterOptions" :key="index" @click="selectFilter(column)">
-                            {{ column }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="order-by filter" @click="orderHandler">
-                <i :class="sortByButton" id="filter-icon" :value="orderValue"></i>
-            </div>
-        </div>
-
+        <!-- v-bind="$attrs" passes the emits from the "grandchild(TableControllers) to the "grandparent(BirthmarkTable) -->
+        <table-controllers :birthmarkArray ="birthmarkArray" :filter-options ="filterOptions" @search-results="updateBirthmarks" v-bind="$attrs"/>
     </div>
 
     <div class="table-names">
@@ -99,14 +78,14 @@
 </template>
 
 <script>
-import SearchBar from './SearchBar.vue'
-//import TableControllers from '../TableControllers.vue';
+//import SearchBar from './SearchBar.vue'
+import TableControllers from '../TableControllers.vue';
 
 export default {
     name: 'BirthmarkRow',
     components: {
-        SearchBar,
-        // TableControllers
+        // SearchBar,
+        TableControllers
     },
     props: {
         birthmarkArray: Array,
@@ -114,30 +93,10 @@ export default {
     },
     data() {
         return {
-            birthmarks: [...this.birthmarkArray],
-            filterData: '',
-            filterView: true,
-            token: localStorage.getItem("token"),
-            order: 'a-z',
-            orderValue: 'ASC'
+            birthmarks: [...this.birthmarkArray]
         }
     },
     methods: {
-        updateRecipients(update) {
-            this.birthmarks = update;
-        },
-        selectFilter(option) {
-            this.$emit("filterData", option);
-        },
-        orderHandler() {
-            if (this.order === 'a-z') {
-                this.order = 'z-a';
-                this.$emit("orderUpdate", 'DESC');
-            } else {
-                this.order = 'a-z';
-                this.$emit("orderUpdate", 'ASC');
-            }
-        },
         startEditing(birthmark) {
             birthmark.editing = true;
             birthmark.originalState = { ...birthmark };
@@ -198,6 +157,9 @@ export default {
             birthmark.deleteState = false;
             this.$emit('recipientDeleted')
             return data;
+        },
+        updateBirthmarks(searchResults){
+            this.birthmarks = searchResults;
         }
     },
     watch: {
@@ -215,9 +177,6 @@ export default {
                     return name
                 }
             });
-        },
-        sortByButton() {
-            return `bx bx-sort-${this.order}`
         }
     }
 }
