@@ -4,7 +4,7 @@
             <li class="menu-header">
                 <h3>Profile menu</h3> <span class="x" @click="this.$data.hide = true">x</span>
             </li>
-            <li @mouseenter="$data.cake = 'bx-tada'" @mouseleave="$data.cake = ''" @click="$router.push('/prosignup')">
+            <li @mouseenter="$data.cake = 'bx-burst'" @mouseleave="$data.cake = ''" @click="$router.push('/prosignup')">
                 My status
                 <span v-if="$data.status">
                     <div><i :class="crownIcon"></i></div>
@@ -19,7 +19,7 @@
                 <div><i :class="cogIcon"></i></div>
             </li>
 
-            <li @mouseenter="isHover = $data.edit = 'bx-burst'" @mouseleave="$data.edit = ''">
+            <li @mouseenter="isHover = $data.edit = 'bx-tada'" @mouseleave="$data.edit = ''">
                 Edit
                 <div><i :class="editIcon"></i></div>
             </li>
@@ -111,7 +111,8 @@ export default {
 
 .profile-menu li:hover {
     background-color: #ddd;
-    color: #2fa8cc;
+    color: #68cdeced;
+    text-shadow: none;
 }
 
 .profile-menu li.menu-header {
@@ -121,6 +122,7 @@ export default {
 }
 
 ul li:first-child {
+    text-shadow: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -135,6 +137,7 @@ li:first-child:hover,
 li:last-child:hover {
     cursor: default;
     color: #fff;
+    background: #6282a6;
 }
 
 .x {

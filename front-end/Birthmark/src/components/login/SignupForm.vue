@@ -12,11 +12,13 @@
 
         <main class="container formGroup">
             <div class="form">
-                <div class="info"></div>
+                <!-- <div class="info"></div> -->
                 <div class="form-content">
                     <h1>Signup</h1>
                     <h1 id="signup_message"></h1>
                     <form>
+                        
+                        <div :class="{ 'error': pwdMsg }">{{ pwdMsg }}</div>
 
                         <div class="field input-field">
                             <input autofocus type="text" placeholder="Name" class="input userName oval-lg" v-model="user_name">
@@ -28,7 +30,6 @@
 
                         <div class="field input-field">
                             <input type="password" placeholder="Create password" class="password oval-lg" id="pwd1" v-model="pwd1">
-                            <div :class="{ 'error': pwdMsg }">{{ pwdMsg }}</div>
                         </div>
 
                         <div class="field input-field">
@@ -98,22 +99,19 @@ export default {
         async isUsernameValid(user_email) {
             const res = await fetch(`http://localhost:3444/admin/validateEmail/?email=${user_email}`);
             const data = await res.json();
-
             if (!res.ok) {
                 throw new Error(`Error: ${res.status} ${res.statusText}`);
             }
             return data;
         },
 
-        // Function to validate username availability
+        // Function to validate username availability >>>>EXTRA!!!!<<<<<
         async userNameValidator(user_email) {
             const isValid = await this.isUsernameValid(user_email);
             if (isValid) {
-                let userNameInUse = `Username: ${user_email} is already in use`;
-                this.pwdMsg = userNameInUse;
-                throw new Error(userNameInUse);
+                return user_email;
             }
-            return user_email;
+            throw new Error(`Username: ${user_email} is already in use`);
         },
 
         // Function to validate password
@@ -130,8 +128,9 @@ export default {
         async detailValidator() {
             const user_name = this.user_name;
             const user_email = await this.userNameValidator(this.user_email);
+            console.log("user5bemail:", user_email);
             const user_pwd = this.passwordValidator(this.pwd1, this.pwd2);
-            if (!user_name || !user_email || !user_pwd) return null;
+            if (!user_name || !user_email || !user_pwd) throw new Error(`User name or password not valid`);
             return { user_name, user_pwd, user_email };
         },
 
@@ -161,7 +160,8 @@ export default {
                 console.log(posted);
                 this.$router.push('/login');
             } catch (error) {
-                console.error(error.message);
+                this.pwdMsg = error.message;
+                console.error("oy", error.message);
             }
         },
     }
@@ -271,10 +271,10 @@ form {
     transform: rotate(360deg);
 }
 
-.info {
+/* .info {
     width: 100%;
     border: 1px red solid;
-}
+} */
 
 /* Form styles */
 .form {
@@ -444,7 +444,7 @@ form {
 .media-options a {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 /* GitHub link styles */
@@ -471,7 +471,7 @@ a.github .github-icon {
 img.google-img {
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 5px;
     transform: translateY(-50%);
 }
 

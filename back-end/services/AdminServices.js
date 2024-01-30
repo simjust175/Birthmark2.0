@@ -22,7 +22,7 @@ export default class AdminService {
         try {
             const findEmail = await Admin.findEmail(query.email);
             console.log("in find email", findEmail[0]);
-            return findEmail[0].user_email;
+            return findEmail[0]?.user_email;
         } catch (error) {
             throw new Error(error);
         }

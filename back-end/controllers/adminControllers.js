@@ -18,8 +18,9 @@ class AdminControllers {
     static async validateEmail(req, res) {
         try {
             const validate = await AdminService.validateEmailService(req);
-            if (!validate) return res.status(404).json({ Error: "adminControllers/validateEmail()" });
-            res.send(validate);
+            console.log("valid email:", validate);
+            if (validate) return res.status(404).json({ Error: "adminControllers/validateEmail(), User_email already in use" });
+            res.json({Success: 'Sign-up successfully!'});
         } catch (error) {
             res.status(500).json({ Error: `In ADminService/validateEmailService() ${error.message}` })
         };

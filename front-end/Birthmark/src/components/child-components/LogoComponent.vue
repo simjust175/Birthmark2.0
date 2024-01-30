@@ -24,11 +24,11 @@ img {
   top: -31px;
 }
 
-/* .logo-link {
+.logo-link {
   height: 180px;
   width: 180px;
   border-radius: 50%;
-} */
+}
 
 /* .logo-link:hover {
   transform: scale(1.05);
@@ -58,9 +58,9 @@ img {
   /*box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4), -6px -6px 12px -1px white;
 } */
 
-.birthmark-logo-container:hover {
+/* .birthmark-logo-container:hover {
   transform: scale(1.1);
-}
+} */
 
 .logoLink {
   cursor: pointer;

@@ -99,7 +99,7 @@ export default {
 .main-landing-container {
     display: flex;
     flex-direction: column;
-    height: 2000px;
+    height: 1132px;
     width: 100%;
 }
 
@@ -191,9 +191,9 @@ export default {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    font-size: 20px;
+    font-size: 17px;
     min-width: 13ch;
-    padding: 15px 41px;
+    padding: 15px 44px;
     border-radius: 2em;
     transition: opacity 0.3s cubic-bezier(0.2, 0, 0.1, 1), transform 0.3s cubic-bezier(0.2, 0, 0.1, 1), box-shadow 0.5s ease, color 0.5s ease, background 0.5s ease;
     will-change: box-shadow, color, transform, opacity, background;

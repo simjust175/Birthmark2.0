@@ -24,7 +24,9 @@ class UserService {
     //log-in
     async userLoginService(body){
         const isValid = await UserModels.validateLoginInfo(body);
-        const userData = await UserModels.getUserByEmail(body.user_email);
+        const userData = await UserModels.getUserByEmail(body.user_email) || null;
+        //if(!userData) return null;
+        console.log("userData", userData);
         const {id, user_name} = userData[0][0];
         const usersPwd = userData[0][0].user_pwd;
         if (isValid.error || !usersPwd) return res.status(404).json({ msg: "Missing details" });
