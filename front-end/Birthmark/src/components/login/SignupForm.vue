@@ -11,29 +11,29 @@
         </div>
 
         <main class="container formGroup">
-            <div class="form">
+            <div class="form" @input="clearError">
                 <!-- <div class="info"></div> -->
                 <div class="form-content">
                     <h1>Signup</h1>
                     <h1 id="signup_message"></h1>
                     <form>
                         
-                        <div :class="{ 'error': pwdMsg }">{{ pwdMsg }}</div>
+                        <div :class="{ 'error': msg }">{{ msg }}</div>
 
                         <div class="field input-field">
-                            <input autofocus type="text" placeholder="Name" class="input userName oval-lg" v-model="user_name">
+                            <input autofocus type="text" placeholder="Name" class="input userName oval-lg" :class="{'err': msg}" v-model="user_name">
                         </div>
 
                         <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input userName oval-lg" v-model="user_email">
+                            <input type="email" placeholder="Email" class="input userName oval-lg" :class="{'err': msg}" v-model="user_email">
                         </div>
 
                         <div class="field input-field">
-                            <input type="password" placeholder="Create password" class="password oval-lg" id="pwd1" v-model="pwd1">
+                            <input type="password" placeholder="Create password" class="password oval-lg" id="pwd1" :class="{'err': msg}" v-model="pwd1">
                         </div>
 
                         <div class="field input-field">
-                            <input type="password" placeholder="Confirm password" class="password oval-lg" id="pwd2" v-model="pwd2">
+                            <input type="password" placeholder="Confirm password" class="password oval-lg" id="pwd2" :class="{'err': msg}" v-model="pwd2">
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
 
@@ -89,12 +89,14 @@ export default {
             user_email: "",
             pwd1: "",
             pwd2: "",
-            pwdMsg: "",
+            msg: "",
             data: "Signup"
         }
     },
     methods: {
-
+        clearError(){
+            this.msg = '';
+        },
         //search the Database for email availability
         async isUsernameValid(user_email) {
             const res = await fetch(`http://localhost:3444/admin/validateEmail/?email=${user_email}`);
@@ -111,6 +113,7 @@ export default {
             if (isValid) {
                 return user_email;
             }
+            this.msg = 'Incorrect username'
             throw new Error(`Username: ${user_email} is already in use`);
         },
 
@@ -122,6 +125,7 @@ export default {
             if (pwd1 === pwd2 && this.isPasswordValid(pwd1)) {
                 return pwd1;
             }
+            this.msg = 'Invalid password';
             throw new Error(`Invalid password!`);
         },
 
@@ -130,7 +134,9 @@ export default {
             const user_email = await this.userNameValidator(this.user_email);
             console.log("user5bemail:", user_email);
             const user_pwd = this.passwordValidator(this.pwd1, this.pwd2);
-            if (!user_name || !user_email || !user_pwd) throw new Error(`User name or password not valid`);
+            if (!user_name || !user_email || !user_pwd) {
+                this.msg = 'Invalid password';
+                throw new Error(`User name or password not valid`)};
             return { user_name, user_pwd, user_email };
         },
 
@@ -160,7 +166,7 @@ export default {
                 console.log(posted);
                 this.$router.push('/login');
             } catch (error) {
-                this.pwdMsg = error.message;
+                this.msg = error.message;
                 console.error("oy", error.message);
             }
         },
@@ -328,21 +334,6 @@ form {
     border-bottom-width: 2px;
 }
 
-/* Form input styles */
-/* .field input {
-    opacity: 100%;
-    display: block;
-    outline: none;
-    width: 100%;
-    padding: 0.95rem;
-    box-sizing: border-box;
-    border: 1.5px solid #d6d0d0f9;
-    background: #dfdbdb;
-    transition: background 0.2s, border-color 0.2s;
-    margin-bottom: 1.5rem;
-    border-radius: var(--border-radius);
-} */
-
 /* Form input focus styles */
 .field input:focus {
     border-color: var(--color-primary);
@@ -418,17 +409,6 @@ form {
     background-color: #FFF;
     color: #8b8b8b;
     padding: 0 15px;
-}
-
-/* signup message */
-
-.error {
-    font-size: 15px;
-    color: red;
-    font-weight: normal;
-    border: 1px solid red;
-    width: 100%;
-    padding: 3px;
 }
 
 

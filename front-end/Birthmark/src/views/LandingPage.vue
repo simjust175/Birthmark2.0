@@ -33,6 +33,7 @@
 
             <div class="first-vid-container second-vid-containers">
                 <div class="second-vid-info">
+                    <h1>1</h1>
                     <h2>You Mark...</h2>
                 </div>
                 <div class="first-vid"></div>
@@ -40,6 +41,7 @@
 
             <div class="third-vid-container second-vid-containers">
                 <div class="third-vid">
+                    <h1>2</h1>
                     <div class="second-vid-info">
                         <h2>We"ll send...</h2>
                     </div>
@@ -51,6 +53,7 @@
 
             <div class="second-vid-container second-vid-containers">
                 <div class="second-vid">
+                    <h1>3</h1>
                     <div class="second-vid-info">
                         <h2>the"ll love you...</h2>
                     </div>
@@ -62,12 +65,10 @@
 
             <div class="second-design-circle"></div>
 
-            <div class="second-info-container">
-                <div class="second-info">
-                    <h2>
-                        AS easy as 1 2 3!
-                    </h2>
-                </div>
+            <div class="second-info-container"></div>
+
+            <div class="second-info">
+                <p> AS easy as 1 2 3! </p>
             </div>
         </div>
     </div>
@@ -326,10 +327,11 @@ export default {
 }
 
 .second-info {
-    background: lightgreen;
-    height: 200px;
-    width: 100px;
-    padding: 10px;
+    position: absolute;
+    top: 70px;
+    right: 220px;
+    z-index: 20;
+    font-size: 70px;
 }
 
 .second-vid-containers {
@@ -362,8 +364,8 @@ export default {
 
 .second-vid-container {
     background-color: #4cbde6;
-    top: 57px;
-    left: 411px;
+    bottom: 35px;
+    right: 45px;
 
 }
 
@@ -377,8 +379,8 @@ export default {
 .third-vid-container {
     /* background-color: #ffd542; */
     background-color: #d9ebe1;
-    top: 320px;
-    left: 218px;
+    bottom: 32px;
+    left: 450px;
 
 }
 

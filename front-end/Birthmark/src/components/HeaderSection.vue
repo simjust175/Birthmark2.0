@@ -4,21 +4,25 @@
       <logo-component />
     </div>
 
-    <nav>
+    <nav :class="{ 'hidden': !$data.token }">
       <ul class="header-ul">
-        <li class="oval-lg my-marks"  @click="checkStatus">My Marks</li>
-        <li class="oval-lg about"  @click="$router.push('/About')">About</li>
-        <li class="oval-lg contact"  @click="$router.push('/Contact')">Contact</li>
+        <li class="oval-lg my-marks" @click="checkStatus">My Marks</li>
+        <li class="oval-lg about" @click="$router.push('/About')">About</li>
+        <li class="oval-lg contact" @click="$router.push('/Contact')">Contact</li>
       </ul>
     </nav>
 
-    <button @click="$router.push('/login')" class="oval-lg" v-if="!$data.token" >
-      Log In
-      <span class="first"></span>
-      <span class="second"></span>
-      <span class="third"></span>
-      <span class="fourth"></span>
-    </button>
+    <div class="log-in" v-if="!$data.token">
+      <div class="sign-up" @click="$router.push('/signup')"> Sign up </div>
+      <button @click="$router.push('/login')" class="oval-lg">
+        Log In
+        <span class="first"></span>
+        <span class="second"></span>
+        <span class="third"></span>
+        <span class="fourth"></span>
+      </button>
+    </div>
+
 
     <div class="profile" @click="hide = !hide" v-else>
       <h2>{{ initials }}</h2>
@@ -37,11 +41,13 @@ export default {
   name: "HeaderSection",
   components: { LogoComponent, ProfileMenu },
   props: { loggedIn: Boolean },
-  data() { return {
-     token: localStorage.getItem("token"),
+  data() {
+    return {
+      token: localStorage.getItem("token"),
       hide: true,
       initials: localStorage.getItem("user_initials")
- } },
+    }
+  },
   methods: {
     checkStatus() {
       if (this.token) {
@@ -51,8 +57,8 @@ export default {
       };
     }
   }, watch: {
-    token(stat){
-      this.token = stat
+    token(stat) {
+      this.token = stat;
     }
   }
 }
@@ -85,6 +91,19 @@ export default {
   margin-right: 10px;
 }
 
+.log-in{
+  display: flex;
+}
+
+.sign-up {
+  padding-top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #2fa8cc;
+  cursor: pointer;
+}
+
 
 nav {
   padding-top: 10px;
@@ -107,16 +126,17 @@ nav ul li:hover {
 }
 
 .my-marks:hover {
-  color: #fe6a6ad4;
+  color: #5fceb4bd;
 }
 
 .about:hover {
-  color:#5fceb4bd;
+  color: #fe6a6ad4;
 }
 
 .contact:hover {
   color: #2fa7ccdc;
 }
+
 nav ul li:active {
   transform: scale(0.9);
 }
@@ -129,7 +149,7 @@ nav ul li:active {
 }
 
 
-.oval-lg{
+.oval-lg {
   width: 210px;
   display: flex;
   align-items: center;
@@ -150,7 +170,7 @@ li {
   transition: all 250ms ease-in-out;
 }
 
- li:hover {
+li:hover {
   border: 3px solid rgba(255, 255, 255, 0);
   outline: none;
   box-shadow: 8px 8px 12px -2px rgba(72, 79, 96, 0.4), -6px -6px 12px -1px white;
@@ -163,18 +183,19 @@ li:active {
   border-color: rgba(255, 255, 255, 0);
 }
 
-li > * {
+li>* {
   vertical-align: middle;
 }
 
-li > span:last-child {
+li>span:last-child {
   padding-left: 8px;
 }
+
 /* <<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>> */
 
 /* log-in li */
 button {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: none;
   padding: 12px 30px;
   font-size: 22px;
@@ -208,22 +229,23 @@ div{
   margin: 20px;
  } */
 
-.circle{
+.circle {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border-radius: 120px;
-  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
 }
-.circle::after{
+
+.circle::after {
   content: '';
   position: absolute;
   height: 80%;
   width: 80%;
   background-color: transparent;
   border-radius: 120px;
-  box-shadow: inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3);
+  box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
 }
 
 button:hover {
@@ -330,8 +352,8 @@ button:hover .fourth {
   color: #0981a5;
   font-weight: bold;
   font-size: 15px;
-  text-shadow: -1px 1px 3px rgba(0,0,0,0.5), 
-   1px -1px 3px rgba(255,255,255,0.8);
+  text-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5),
+    1px -1px 3px rgba(255, 255, 255, 0.8);
   margin-left: 113px;
   margin-right: 20px;
   margin-top: 10px;

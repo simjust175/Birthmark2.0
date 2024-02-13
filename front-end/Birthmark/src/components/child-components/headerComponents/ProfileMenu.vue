@@ -2,7 +2,7 @@
     <div class="profile-menu">
         <ul>
             <li class="menu-header">
-                <h3>Profile menu</h3> <span class="x" @click="this.$data.hide = true">x</span>
+                <span class="x" @click="this.$data.hide = true">x</span>
             </li>
             <li @mouseenter="$data.cake = 'bx-burst'" @mouseleave="$data.cake = ''" @click="$router.push('/prosignup')">
                 My status
@@ -53,7 +53,12 @@ export default {
             const confirm = window.confirm('Are you sure you want to log out?')
             if (confirm) {
                 localStorage.removeItem("token");
-                this.$router.currentRoute.value.name.length < 2 ? 'refresh' : this.$router.push('/')
+                //this.$router.currentRoute.value.name.length < 2 ? window.location.reload() : this.$router.push('/');
+                if (this.$router.currentRoute.value.path === '/') {
+                    window.location.reload();
+                } else {
+                    this.$router.push('/');
+                }
             };
         }
     },
@@ -93,7 +98,7 @@ export default {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    border: 1px solid #2fa8cc;
+    /* border: 1px solid #2fa8cc; */
     border-radius: 8px;
 }
 
@@ -102,7 +107,6 @@ export default {
     padding: 9px 19px;
     background-color: #ffffff;
     color: #BABECC;
-    text-shadow: 1px 1px 1px #fff;
     border-top: 1px solid #ddd;
     text-align: center;
     display: flex;
@@ -111,24 +115,24 @@ export default {
 
 .profile-menu li:hover {
     background-color: #ddd;
-    color: #68cdeced;
+    color: #2fa8cc;
     text-shadow: none;
 }
 
-.profile-menu li.menu-header {
+/* .profile-menu li.menu-header {
     background: #6282a6;
     font-size: 18px;
     color: #fff;
-}
+} */
 
 ul li:first-child {
     text-shadow: none;
+    height: 30px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 ul li:last-child {
-    background: #6282a6;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -137,7 +141,7 @@ li:first-child:hover,
 li:last-child:hover {
     cursor: default;
     color: #fff;
-    background: #6282a6;
+    background: #fff;
 }
 
 .x {
@@ -161,4 +165,5 @@ i {
 
 i:hover {
     transform: scale(1.05);
-}</style>
+}
+</style>

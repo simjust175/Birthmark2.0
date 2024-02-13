@@ -102,6 +102,7 @@ input::placeholder {
 
 .oval-lg.err {
     border: 2px solid red;
+    background-color: #f57a7abb;
     color: red;
     box-sizing: border-box;
 }

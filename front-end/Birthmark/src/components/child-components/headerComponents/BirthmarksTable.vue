@@ -1,5 +1,4 @@
 <template>
-
     <div class="exit-bm_table" @click="$router.push('/input')">X</div>
     <div class="birthmarks-container" v-if="birthmarksStat">
         <birthmark-row :birthmarkArray="birthmarkArray" :columns="columns" @filter-data="updateFilter"
@@ -8,8 +7,8 @@
 
     <div class="empty-state" v-else>
         <div class="empty-message" @mouseenter="setHappyState" @mouseleave="setSadState" @click="$router.push('/input')">
-            <h3 :class="imageSrc">Lets make someone smile..</h3>
-            <img :src="`/${imageSrc}.svg`" class="sad"/>
+            <p :class="imageSrc">Lets make someone smile..</p>
+            <img :src="`/${imageSrc}.svg`" class="sad" />
         </div>
     </div>
 </template>
@@ -66,7 +65,7 @@ export default {
     async mounted() {
         await this.getRecipients(this.orderBy);
     },
-    watch: { birthmarkArray(update){ return this.birthmarkArray = update}},
+    watch: { birthmarkArray(update) { return this.birthmarkArray = update } },
     computed: {
         birthmarksStat() {
             const stat = this.birthmarkArray.length
@@ -88,12 +87,13 @@ export default {
     --main-font: 'Audiowide', sans-serif;
 }
 
-.exit-bm_table, .exit-bm_table:active {
+.exit-bm_table,
+.exit-bm_table:active {
     position: absolute;
-   height: 50px;
-   width: 50px;
-   text-align: center;
-   box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
     border-radius: 50px;
     background-color: #b2e0df;
     top: 102px;
@@ -102,62 +102,56 @@ export default {
     font-size: 30px;
 }
 
-.exit-bm_table:hover {   
-   box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+.exit-bm_table:hover {
+    box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
 }
 
 .birthmarks-container {
     width: 100vw;
     padding: 0;
     margin-top: 3px;
-    background: rgb(211, 211, 211);
+    background: #f7f7f7;
 }
 
 .sad {
     height: 98vh;
     width: 98vw;
+    opacity: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 30px;
 }
 
-h3.sad {
+p.sad {
     color: transparent;
 }
 
-.happy{
-    width: 100vw;
-    font-weight: normal;
-    position: absolute;
-    text-decoration: underline;
-    cursor: pointer;
-    color: grey;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+p.happy{
+    color: #5F9397;
 }
 
-.empty-message h3 {
+.sad img{
+    opacity: 10%;
+}
+
+.empty-message p {
     position: absolute;
     z-index: 1;
+    font-size: 40px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-weight: normal;
+    white-space: nowrap;
 }
 
-/* .empty-message h3:hover {
-    
-} */
-
-.empty-message {
-    font-size: 50px;
-    font-weight: bolder;
-    color: rgb(137, 137, 138);
-    font-family: var(--main-font);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.empty-message p:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
+
+
+
 </style>

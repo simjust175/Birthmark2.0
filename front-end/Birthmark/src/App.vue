@@ -1,6 +1,6 @@
 <template>
   <main>
-    <router-view />
+    <router-view :key="$route.fullPath"/>
   </main>
   
 </template>
@@ -16,17 +16,4 @@ export default {
 </script>
 
 <style src="../src/assets/buttons.css"></style>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Dancing+Script:wght@400;500;700&family=Marhey:wght@300;400;500&display=swap');
-
-html,
-#app {
-  width: 0;
-  padding: 0;
-  margin: 0;
-  background: #EBECF0;
-}
-.hidden {
-  display: none;
-}
-</style>
+<style src="../src/assets/common.css"></style>

@@ -19,15 +19,15 @@ img {
   width: auto;
   transition: all ease-in-out 0.3s;
   /* taken from logo-link */
-  position: absolute;
-  left: -12px;
-  top: -31px;
 }
 
 .logo-link {
-  height: 180px;
-  width: 180px;
+  height: 190px;
+  width: 190px;
   border-radius: 50%;
+  position: absolute;
+  left: -12px;
+  top: -31px;
 }
 
 /* .logo-link:hover {
@@ -62,7 +62,11 @@ img {
   transform: scale(1.1);
 } */
 
-.logoLink {
+.logo-link:hover {
   cursor: pointer;
+}
+
+.logo-link:hover img{
+  transform: scale(1.05);
 }
 </style>

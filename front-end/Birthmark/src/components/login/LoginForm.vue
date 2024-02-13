@@ -13,14 +13,14 @@
         <div class="form login__form">
             <div class="form-content">
                 <h1>Login</h1>
-                <h3 id="login_message"></h3>
-                <form action="#">
+                <div id="error-msg" :class="{'error': msg}">{{ msg }}</div>
+                <form action="#" @input="msg = ''">
                     <div class="field input-field oval-lg">
-                        <input autofocus="email" placeholder="Enter email" class="input oval-lg" :class="{'err': isError}" v-model="email">
+                        <input autofocus="email" placeholder="Enter email" class="input oval-lg" :class="{'err': msg}" v-model="email">
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" placeholder="Password" class="password oval-lg" v-model="pwd">
+                        <input type="password" placeholder="Password" class="password oval-lg" :class="{'err': msg}" v-model="pwd">
                         <i class='bx bx-hide eye-icon'></i>
                     </div>
 
@@ -70,7 +70,7 @@ export default {
         return {
             email: "",
             pwd: "",
-            isError: false
+            msg: ''
         }
     },
     methods: {
@@ -97,7 +97,10 @@ export default {
             console.log("rs:", response);
             const data = await response.json();
             console.log("loginData ", data);
-            if(response.status > 400)  return null
+            if(response.status > 400)  {
+                this.msg = 'Username or password incorrect';
+                return null
+            }
             const { newToken: { id, user_name, newToken: { token } } } = data;
             const user_initials = this.upperCase(user_name)
             localStorage.setItem("token", token);
@@ -171,40 +174,9 @@ template,
     border-top-left-radius: 420px 120px;
 }
 
-
-/* Header styles */
-header {
-    font-size: 28px;
-    font-weight: 600;
-    color: #ffffff58;
-    text-align: center;
-}
-
 /* Form container styles */
 form {
     margin-top: 30px;
 }
 
-.loginRoundDesign {
-    height: 1800px;
-    width: 1800px;
-    border-radius: 50%;
-    position: absolute;
-}
-
-/* .loginRoundDesign .third{
-    left: -800px;
-    top: -800px;
-    background: rgb(201, 5, 5);
-    border: 5px solid rgb(23, 168, 168);
-    z-index: 6;
-} */
-
-/* .loginRoundDesign .second{
-    right: -800px;
-    top: -800px;
-    background: pink; */
-/* background: rgba(19, 245, 245, 0.498); */
-/* border: 5px solid rgb(23, 168, 168);
-} */
 </style>
